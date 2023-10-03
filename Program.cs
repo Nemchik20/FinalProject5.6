@@ -37,14 +37,11 @@ namespace Program
                 Print(message);
                 string temp = Console.ReadLine();
                 byte bytetemp;
-                if(byte.TryParse(temp, out bytetemp))
+                if(byte.TryParse(temp, out bytetemp) & temp != string.Empty)
                 {
-                    if (bytetemp > 0)
+                    if (bytetemp > 0 & bytetemp < 120)
                     {
-                        if (bytetemp < 100)
-                        {
-                            return bytetemp;
-                        }
+                        return bytetemp;
                     }
                 }
                 Print("Не корректный ввод");
