@@ -7,7 +7,8 @@ namespace Program
         public static void Main(string[] args)
         {
             (string name, string lastName, byte age, string[] namePets, string[] color) = InputConsoleUserData();
-            PrintDataUser(name, lastName, age, namePets, color);
+            Print($"\nВаше имя:{name} \nВаша фамилия: {lastName} \nВаш возраст: {age} \nКоличество питомцев {namePets.Length + 1}" +
+                $"\n {DataRes(namePets)} \nКоличество цветов: {color.Length} \n{DataRes(color)}");
             Console.ReadKey();
         }
         private static (string name, string lastName, byte age,string[] namePets, string[] color) InputConsoleUserData()
@@ -47,7 +48,6 @@ namespace Program
                 Print("Не корректный ввод");
             }
         }
-
         private static string[] GetArrayData(bool truePetFalseColor)
         {
             string[] pet = new string[] {"Сколько у вас питомцев?", "Какое имя у вашего питомца",
@@ -74,17 +74,20 @@ namespace Program
             }
             for (int i = 0; i < dataAray.Length; i++)
             {
-                dataAray[i] = Console.ReadLine();
-                Print($"Еще {dataAray.Length - (i + 1)} {tempQuestion[3]}");
+                string temp =Console.ReadLine();
+                if(temp != string.Empty)
+                {
+                    dataAray[i] = temp;
+                    Print($"Еще {dataAray.Length - (i + 1)} {tempQuestion[3]}");
+                }
+                else
+                {
+                    i--;
+                    Print("Не корректный ввод");
+                }
             }
             return dataAray;
         }
-        private static void PrintDataUser(string name, string lastName, byte age, string[] namePets, string[] color) 
-        {
-            Print($"\nВаше имя:{name} \nВаша фамилия: {lastName} \nВаш возраст: {age} \nКоличество питомцев {namePets.Length + 1}" +
-                $"\n {DataRes(namePets)} \nКоличество цветов: {color.Length} \n{DataRes(color)}");
-        }
-
         private static string DataRes(string[] data)
         {
             string dataStr = "Список";
